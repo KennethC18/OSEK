@@ -1,0 +1,9 @@
+../myDrivers/SO.c:22:6:Create_Task	32	static
+../myDrivers/SO.c:76:6:Activate_Task	24	static
+../myDrivers/SO.c:112:6:Activate_Task_ISR	24	static
+../myDrivers/SO.c:138:6:Chain_Task	24	static
+../myDrivers/SO.c:162:6:Terminate_Task	8	static
+../myDrivers/SO.c:180:6:Scheduler	16	static
+../myDrivers/SO.c:226:6:SO_Init	8	static
+../myDrivers/SO.c:235:6:Save_Context	4	static
+../myDrivers/SO.c:289:6:Restore_Context	4	static
