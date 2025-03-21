@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <SAE/App.h>
 #include "board.h"
 #include "peripherals.h"
 #include "pin_mux.h"
@@ -26,14 +27,30 @@ int main(void) {
     Init_Pins();
     Off();
     GPIO_Config();
+    PIT_Config();
+
+    /* Crear alarmas */
+    Set_Alarm('A', 100, ENABLED);
+    Set_Alarm('B', 10, DISABLED);
+    Set_Alarm('C', 20, DISABLED);
+    Set_Alarm('D', 30, DISABLED);
+	Set_Alarm('E', 40, DISABLED);
+	Set_Alarm('F', 50, DISABLED);
+	Set_Alarm('G', 80, DISABLED);
+
 
     /* Creación de tareas */
-    Create_Task(1, 'A', AUTOSTART_ON,  1, Task_A);
-    Create_Task(2, 'B', AUTOSTART_OFF, 2, Task_B);
-    Create_Task(3, 'C', AUTOSTART_OFF, 3, Task_C);
+    Create_Task(1, 'A', AUTOSTART_OFF, 2, Task_A);
+    Create_Task(2, 'B', AUTOSTART_OFF, 1, Task_B);
+    Create_Task(3, 'C', AUTOSTART_OFF, 1, Task_C);
+    Create_Task(4, 'D', AUTOSTART_OFF, 1, Task_D);
+    Create_Task(5, 'E', AUTOSTART_OFF, 1, Task_E);
+    Create_Task(6, 'F', AUTOSTART_OFF, 1, Task_F);
+    Create_Task(7, 'G', AUTOSTART_OFF, 1, Task_G);
+
 
     /* Tareas a ejecutar cuando suceda una interrupción */
-    Create_Task(4, 'D', AUTOSTART_OFF, 4, Task_ISR);
+    //Create_Task(4, 'D', AUTOSTART_OFF, 4, Task_ISR);
 
     /* Inciar el SO (Llamar al Scheduler) */
     SO_Init();

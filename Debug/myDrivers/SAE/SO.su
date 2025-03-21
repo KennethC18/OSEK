@@ -1,0 +1,13 @@
+C:\MCU_SOTR\XD\CMSIS/core_cm4.h:1717:22:__NVIC_DisableIRQ	16	static
+../myDrivers/SAE/SO.c:32:6:Create_Task	32	static
+../myDrivers/SAE/SO.c:86:6:Activate_Task	24	static
+../myDrivers/SAE/SO.c:123:6:Activate_Task_ISR	24	static
+../myDrivers/SAE/SO.c:150:6:Chain_Task	24	static
+../myDrivers/SAE/SO.c:175:6:Terminate_Task	8	static
+../myDrivers/SAE/SO.c:195:6:Scheduler	16	static
+../myDrivers/SAE/SO.c:241:6:SO_Init	8	static
+../myDrivers/SAE/SO.c:252:6:Save_Context	4	static
+../myDrivers/SAE/SO.c:310:6:Restore_Context	4	static
+../myDrivers/SAE/SO.c:357:6:Set_Alarm	24	static
+../myDrivers/SAE/SO.c:384:6:Check_Alarms	16	static
+../myDrivers/SAE/SO.c:419:6:PIT0_IRQHandler	8	static

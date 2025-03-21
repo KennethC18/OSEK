@@ -1,0 +1,13 @@
+C:\MCU_SOTR\XD\CMSIS/core_cm4.h:1679:22:__NVIC_EnableIRQ	16	static
+C:\MCU_SOTR\XD\drivers/fsl_common_arm.h:499:24:EnableIRQ	24	static
+../myDrivers/SAE/App.c:19:6:GPIO_Config	16	static
+../myDrivers/SAE/App.c:48:6:delay	24	static
+../myDrivers/SAE/App.c:59:6:Task_A	8	static
+../myDrivers/SAE/App.c:83:6:Task_B	8	static
+../myDrivers/SAE/App.c:100:6:Task_C	8	static
+../myDrivers/SAE/App.c:110:6:Task_D	8	static
+../myDrivers/SAE/App.c:115:6:Task_E	8	static
+../myDrivers/SAE/App.c:120:6:Task_F	8	static
+../myDrivers/SAE/App.c:125:6:Task_G	8	static
+../myDrivers/SAE/App.c:137:6:Task_ISR	8	static
+../myDrivers/SAE/App.c:151:6:PORTA_IRQHandler	8	static

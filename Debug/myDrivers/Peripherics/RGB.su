@@ -1,0 +1,7 @@
+../myDrivers/Peripherics/RGB.c:19:6:Config_Pins	4	static
+../myDrivers/Peripherics/RGB.c:42:6:Init_Pins	4	static
+../myDrivers/Peripherics/RGB.c:55:6:Red	4	static
+../myDrivers/Peripherics/RGB.c:67:6:Blue	4	static
+../myDrivers/Peripherics/RGB.c:79:6:Green	4	static
+../myDrivers/Peripherics/RGB.c:91:6:White	4	static
+../myDrivers/Peripherics/RGB.c:103:6:Off	4	static

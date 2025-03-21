@@ -1,4 +1,6 @@
-myDrivers/RGB.o myDrivers/RGB.d: ../myDrivers/RGB.c ../myDrivers/RGB.h \
+myDrivers/SAE/data_structures.o myDrivers/SAE/data_structures.d: \
+ ../myDrivers/SAE/data_structures.c \
+ C:\MCU_SOTR\XD\myDrivers/SAE/data_structures.h \
  C:\MCU_SOTR\XD\board/board.h C:\MCU_SOTR\XD\board/clock_config.h \
  C:\MCU_SOTR\XD\drivers/fsl_common.h \
  C:\MCU_SOTR\XD\device/fsl_device_registers.h \
@@ -10,13 +12,13 @@ myDrivers/RGB.o myDrivers/RGB.d: ../myDrivers/RGB.c ../myDrivers/RGB.h \
  C:\MCU_SOTR\XD\drivers/fsl_common_arm.h \
  C:\MCU_SOTR\XD\drivers/fsl_clock.h C:\MCU_SOTR\XD\drivers/fsl_common.h \
  C:\MCU_SOTR\XD\drivers/fsl_gpio.h C:\MCU_SOTR\XD\drivers/fsl_port.h \
+ C:\MCU_SOTR\XD\board/peripherals.h C:\MCU_SOTR\XD\board/pin_mux.h \
  C:\MCU_SOTR\XD\board/clock_config.h \
  C:\MCU_SOTR\XD\utilities/fsl_debug_console.h \
  C:\MCU_SOTR\XD\component\serial_manager/fsl_component_serial_manager.h \
  C:\MCU_SOTR\XD\component\serial_manager/fsl_component_serial_port_uart.h \
- C:\MCU_SOTR\XD\component\uart/fsl_adapter_uart.h \
- C:\MCU_SOTR\XD\board/peripherals.h C:\MCU_SOTR\XD\board/pin_mux.h
-../myDrivers/RGB.h:
+ C:\MCU_SOTR\XD\component\uart/fsl_adapter_uart.h
+C:\MCU_SOTR\XD\myDrivers/SAE/data_structures.h:
 C:\MCU_SOTR\XD\board/board.h:
 C:\MCU_SOTR\XD\board/clock_config.h:
 C:\MCU_SOTR\XD\drivers/fsl_common.h:
@@ -33,10 +35,10 @@ C:\MCU_SOTR\XD\drivers/fsl_clock.h:
 C:\MCU_SOTR\XD\drivers/fsl_common.h:
 C:\MCU_SOTR\XD\drivers/fsl_gpio.h:
 C:\MCU_SOTR\XD\drivers/fsl_port.h:
+C:\MCU_SOTR\XD\board/peripherals.h:
+C:\MCU_SOTR\XD\board/pin_mux.h:
 C:\MCU_SOTR\XD\board/clock_config.h:
 C:\MCU_SOTR\XD\utilities/fsl_debug_console.h:
 C:\MCU_SOTR\XD\component\serial_manager/fsl_component_serial_manager.h:
 C:\MCU_SOTR\XD\component\serial_manager/fsl_component_serial_port_uart.h:
 C:\MCU_SOTR\XD\component\uart/fsl_adapter_uart.h:
-C:\MCU_SOTR\XD\board/peripherals.h:
-C:\MCU_SOTR\XD\board/pin_mux.h:

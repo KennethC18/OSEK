@@ -20,7 +20,8 @@ component/serial_manager \
 component/uart \
 device \
 drivers \
-myDrivers \
+myDrivers/Peripherics \
+myDrivers/SAE \
 source \
 startup \
 utilities \
