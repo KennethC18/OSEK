@@ -62,6 +62,7 @@ void Task_G(void);
  * Retorno: Ninguno
  */
 void Task_ISR(void);
+void Task_ISR_2(void);
 
 /*
  * Función: PORTA_IRQHandler

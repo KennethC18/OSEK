@@ -1,35 +1,40 @@
 board/board.o board/board.d: ../board/board.c \
- C:\MCU_SOTR\XD\device/fsl_device_registers.h \
- C:\MCU_SOTR\XD\device/MK66F18.h C:\MCU_SOTR\XD\CMSIS/core_cm4.h \
- C:\MCU_SOTR\XD\CMSIS/cmsis_version.h \
- C:\MCU_SOTR\XD\CMSIS/cmsis_compiler.h C:\MCU_SOTR\XD\CMSIS/cmsis_gcc.h \
- C:\MCU_SOTR\XD\device/system_MK66F18.h \
- C:\MCU_SOTR\XD\device/MK66F18_features.h ../board/board.h \
- ../board/clock_config.h C:\MCU_SOTR\XD\drivers/fsl_common.h \
- C:\MCU_SOTR\XD\drivers/fsl_common_arm.h \
- C:\MCU_SOTR\XD\drivers/fsl_clock.h C:\MCU_SOTR\XD\drivers/fsl_common.h \
- C:\MCU_SOTR\XD\drivers/fsl_gpio.h C:\MCU_SOTR\XD\drivers/fsl_port.h \
- C:\MCU_SOTR\XD\utilities/fsl_debug_console.h \
- C:\MCU_SOTR\XD\component\serial_manager/fsl_component_serial_manager.h \
- C:\MCU_SOTR\XD\component\serial_manager/fsl_component_serial_port_uart.h \
- C:\MCU_SOTR\XD\component\uart/fsl_adapter_uart.h
-C:\MCU_SOTR\XD\device/fsl_device_registers.h:
-C:\MCU_SOTR\XD\device/MK66F18.h:
-C:\MCU_SOTR\XD\CMSIS/core_cm4.h:
-C:\MCU_SOTR\XD\CMSIS/cmsis_version.h:
-C:\MCU_SOTR\XD\CMSIS/cmsis_compiler.h:
-C:\MCU_SOTR\XD\CMSIS/cmsis_gcc.h:
-C:\MCU_SOTR\XD\device/system_MK66F18.h:
-C:\MCU_SOTR\XD\device/MK66F18_features.h:
+ /home/kenneth/RTOS/OSEK_Queues/device/fsl_device_registers.h \
+ /home/kenneth/RTOS/OSEK_Queues/device/MK66F18.h \
+ /home/kenneth/RTOS/OSEK_Queues/CMSIS/core_cm4.h \
+ /home/kenneth/RTOS/OSEK_Queues/CMSIS/cmsis_version.h \
+ /home/kenneth/RTOS/OSEK_Queues/CMSIS/cmsis_compiler.h \
+ /home/kenneth/RTOS/OSEK_Queues/CMSIS/cmsis_gcc.h \
+ /home/kenneth/RTOS/OSEK_Queues/device/system_MK66F18.h \
+ /home/kenneth/RTOS/OSEK_Queues/device/MK66F18_features.h \
+ ../board/board.h ../board/clock_config.h \
+ /home/kenneth/RTOS/OSEK_Queues/drivers/fsl_common.h \
+ /home/kenneth/RTOS/OSEK_Queues/drivers/fsl_common_arm.h \
+ /home/kenneth/RTOS/OSEK_Queues/drivers/fsl_clock.h \
+ /home/kenneth/RTOS/OSEK_Queues/drivers/fsl_common.h \
+ /home/kenneth/RTOS/OSEK_Queues/drivers/fsl_gpio.h \
+ /home/kenneth/RTOS/OSEK_Queues/drivers/fsl_port.h \
+ /home/kenneth/RTOS/OSEK_Queues/utilities/fsl_debug_console.h \
+ /home/kenneth/RTOS/OSEK_Queues/component/serial_manager/fsl_component_serial_manager.h \
+ /home/kenneth/RTOS/OSEK_Queues/component/serial_manager/fsl_component_serial_port_uart.h \
+ /home/kenneth/RTOS/OSEK_Queues/component/uart/fsl_adapter_uart.h
+/home/kenneth/RTOS/OSEK_Queues/device/fsl_device_registers.h:
+/home/kenneth/RTOS/OSEK_Queues/device/MK66F18.h:
+/home/kenneth/RTOS/OSEK_Queues/CMSIS/core_cm4.h:
+/home/kenneth/RTOS/OSEK_Queues/CMSIS/cmsis_version.h:
+/home/kenneth/RTOS/OSEK_Queues/CMSIS/cmsis_compiler.h:
+/home/kenneth/RTOS/OSEK_Queues/CMSIS/cmsis_gcc.h:
+/home/kenneth/RTOS/OSEK_Queues/device/system_MK66F18.h:
+/home/kenneth/RTOS/OSEK_Queues/device/MK66F18_features.h:
 ../board/board.h:
 ../board/clock_config.h:
-C:\MCU_SOTR\XD\drivers/fsl_common.h:
-C:\MCU_SOTR\XD\drivers/fsl_common_arm.h:
-C:\MCU_SOTR\XD\drivers/fsl_clock.h:
-C:\MCU_SOTR\XD\drivers/fsl_common.h:
-C:\MCU_SOTR\XD\drivers/fsl_gpio.h:
-C:\MCU_SOTR\XD\drivers/fsl_port.h:
-C:\MCU_SOTR\XD\utilities/fsl_debug_console.h:
-C:\MCU_SOTR\XD\component\serial_manager/fsl_component_serial_manager.h:
-C:\MCU_SOTR\XD\component\serial_manager/fsl_component_serial_port_uart.h:
-C:\MCU_SOTR\XD\component\uart/fsl_adapter_uart.h:
+/home/kenneth/RTOS/OSEK_Queues/drivers/fsl_common.h:
+/home/kenneth/RTOS/OSEK_Queues/drivers/fsl_common_arm.h:
+/home/kenneth/RTOS/OSEK_Queues/drivers/fsl_clock.h:
+/home/kenneth/RTOS/OSEK_Queues/drivers/fsl_common.h:
+/home/kenneth/RTOS/OSEK_Queues/drivers/fsl_gpio.h:
+/home/kenneth/RTOS/OSEK_Queues/drivers/fsl_port.h:
+/home/kenneth/RTOS/OSEK_Queues/utilities/fsl_debug_console.h:
+/home/kenneth/RTOS/OSEK_Queues/component/serial_manager/fsl_component_serial_manager.h:
+/home/kenneth/RTOS/OSEK_Queues/component/serial_manager/fsl_component_serial_port_uart.h:
+/home/kenneth/RTOS/OSEK_Queues/component/uart/fsl_adapter_uart.h:

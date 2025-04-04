@@ -103,6 +103,7 @@ typedef struct Task {
     void*       return_address;
     uint8_t     interrupted;
     Context     context;
+
     struct Task* next;
 } Task;
 
@@ -131,11 +132,26 @@ typedef struct Alarm {
 	uint16_t		remain_time;
 	Enable_Alarm	enable;
 
+	uint8_t			alarm_activated;
+
 	struct Alarm*	next;
 } Alarm;
 
 typedef struct {
 	Alarm* head;
 } Alarm_List;
+
+
+/*
+ * Estructura para las queues
+ * */
+typedef struct Queue {
+    uint32_t length;     // Número máximo de elementos
+    uint32_t item_size;  // Tamaño en bytes de cada elemento
+    uint32_t head;       // Índice del frente de la cola
+    uint32_t tail;       // Índice del final de la cola
+    uint32_t count;      // Número actual de elementos
+    uint8_t* buffer;     // Buffer contiguo para almacenar los elementos
+} Queue_t;
 
 #endif /* SAE_DATA_STRUCTURES_H_ */

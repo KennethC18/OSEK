@@ -23,7 +23,6 @@ void PIT_Config(void) {
 	 *	In this case, is = (BusClockFreq / 22,050) - 1
 	 */
 	*PIT_LDVAL0 = 0x1770;
-	//*PIT_LDVAL0 = 0x1c9c380;
 
 	/*
 	 * CHN (2)	= 0 (Timer is NOT chained)

@@ -109,4 +109,56 @@ void Restore_Context(void);
 void Set_Alarm(char task_ID, uint16_t time, Enable_Alarm enable);	// time en ticks
 void Check_Alarms(void);
 
+
+/*
+ * Función: Queue_Init
+ * Descripción: Inicializa una cola FIFO con una longitud máxima y tamaño de elemento fijos.
+ * Parámetros:
+ *   - length: Número máximo de elementos en la cola.
+ *   - item_size: Tamaño en bytes de cada elemento.
+ * Retorno:
+ *   - Puntero a la cola inicializada o NULL si falla la asignación.
+ */
+Queue_t* Queue_Init(uint32_t length, uint32_t item_size);
+
+/*
+ * Función: Queue_IsEmpty
+ * Descripción: Verifica si la cola está vacía.
+ */
+bool Queue_IsEmpty(Queue_t* q);
+
+/*
+ * Función: Queue_IsFull
+ * Descripción: Verifica si la cola está llena.
+ */
+bool Queue_IsFull(Queue_t* q);
+
+/*
+ * Función: Queue_Enqueue
+ * Descripción: Inserta un elemento en el final de la cola.
+ * Parámetros:
+ *   - q: Puntero a la cola.
+ *   - item: Puntero a los datos a insertar (de tamaño item_size).
+ * Retorno:
+ *   - 0 si se encola correctamente o -1 si la cola está llena.
+ */
+int Queue_Enqueue(Queue_t* q, const void* item);
+
+/*
+ * Función: Queue_Dequeue
+ * Descripción: Extrae el elemento del frente de la cola.
+ * Parámetros:
+ *   - q: Puntero a la cola.
+ *   - item: Puntero al buffer donde se copiará el elemento extraído.
+ * Retorno:
+ *   - 0 si se desencola correctamente o -1 si la cola está vacía.
+ */
+int Queue_Dequeue(Queue_t* q, void* item);
+
+/*
+ * Función: Queue_Free
+ * Descripción: Libera la memoria asignada a la cola.
+ */
+void Queue_Free(Queue_t* q);
+
 #endif /* SAE_SO_H_ */

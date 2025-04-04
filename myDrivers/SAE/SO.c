@@ -11,11 +11,14 @@
 #include <Peripherics/Low_Power.h>
 #include <Peripherics/RGB.h>
 #include <SAE/SO.h>
-
+#include <fsl_debug_console.h>
 
 /* Estructura global que contiene la lista de tareas y el puntero a la tarea actual */
 Alarm_List	list_a	= {NULL};
 Task_List	list	= {NULL, NULL, {NULL}};
+
+/* Variables globales */
+volatile uint8_t Alarm_Activated = 0;
 
 /*
  * Función: Create_Task
@@ -208,7 +211,6 @@ void Scheduler(void) {
             if (current->interrupted) {
                 // Marcar la tarea como no interrumpida
                 current->interrupted = 0;
-
                 // Restaurar el contexto de la tarea interrumpida
                 Restore_Context();
             }
@@ -228,7 +230,6 @@ void Scheduler(void) {
     }
 
     // Si no hay tareas listas para ejecutarse, entrar en modo de bajo consumo
-
     sleep();
 }
 
@@ -366,6 +367,8 @@ void Set_Alarm(char task_ID, uint16_t time, Enable_Alarm enable) {
     new_alarm->original_time	= time;
     new_alarm->remain_time		= time;
     new_alarm->enable			= enable;
+    new_alarm->alarm_activated  = 0;
+
     new_alarm->next				= NULL;
 
 
@@ -381,34 +384,99 @@ void Set_Alarm(char task_ID, uint16_t time, Enable_Alarm enable) {
     }
 }
 
-void Check_Alarms(void) {
-	Alarm* current = list_a.head;
 
-	while(current != NULL) {
-		if(current->enable == ENABLED) {
-			current->remain_time--;
-		}
+/*
+ * Función: Queue_Init
+ * Descripción: Inicializa una cola FIFO con una longitud máxima y tamaño de elemento fijos.
+ * Parámetros:
+ *   - length: Número máximo de elementos en la cola.
+ *   - item_size: Tamaño en bytes de cada elemento.
+ * Retorno:
+ *   - Puntero a la cola inicializada o NULL si falla la asignación.
+ */
+Queue_t* Queue_Init(uint32_t length, uint32_t item_size) {
+    Queue_t* q = (Queue_t*)malloc(sizeof(Queue_t));
+    if (q == NULL) {
+        return NULL;
+    }
+    q->length = length;
+    q->item_size = item_size;
+    q->head = 0;
+    q->tail = 0;
+    q->count = 0;
+    q->buffer = (uint8_t*)malloc(length * item_size);
+    if (q->buffer == NULL) {
+        free(q);
+        return NULL;
+    }
+    return q;
+}
 
-		if(current->remain_time == 0) {
-			// Activar todas las alarmas
-			if(current == list_a.head) {
-				Alarm* temp = list_a.head;
-				temp = temp->next;
+/*
+ * Función: Queue_IsEmpty
+ * Descripción: Verifica si la cola está vacía.
+ */
+bool Queue_IsEmpty(Queue_t* q) {
+    return (q->count == 0);
+}
 
-				while(temp != NULL) {
-					temp->enable = ENABLED;
-					temp = temp->next;
-				}
-			}
-			else{
-				current->enable = DISABLED;
-			}
-			current->remain_time = current->original_time;
-			NVIC_DisableIRQ(PIT0_IRQn);
-			Activate_Task_ISR(current->task_ID);
-		}
-		current = current->next;
-	}
+/*
+ * Función: Queue_IsFull
+ * Descripción: Verifica si la cola está llena.
+ */
+bool Queue_IsFull(Queue_t* q) {
+    return (q->count == q->length);
+}
+
+/*
+ * Función: Queue_Enqueue
+ * Descripción: Inserta un elemento en el final de la cola.
+ * Parámetros:
+ *   - q: Puntero a la cola.
+ *   - item: Puntero a los datos a insertar (de tamaño item_size).
+ * Retorno:
+ *   - 0 si se encola correctamente o -1 si la cola está llena.
+ */
+int Queue_Enqueue(Queue_t* q, const void* item) {
+    if (Queue_IsFull(q)) {
+        return -1; // Cola llena
+    }
+    // Copia el elemento al buffer en la posición tail
+    memcpy(q->buffer + (q->tail * q->item_size), item, q->item_size);
+    q->tail = (q->tail + 1) % q->length;
+    q->count++;
+    return 0;
+}
+
+/*
+ * Función: Queue_Dequeue
+ * Descripción: Extrae el elemento del frente de la cola.
+ * Parámetros:
+ *   - q: Puntero a la cola.
+ *   - item: Puntero al buffer donde se copiará el elemento extraído.
+ * Retorno:
+ *   - 0 si se desencola correctamente o -1 si la cola está vacía.
+ */
+int Queue_Dequeue(Queue_t* q, void* item) {
+    if (Queue_IsEmpty(q)) {
+        return -1; // Cola vacía
+    }
+    // Copia el elemento del buffer en la posición head
+    memcpy(item, q->buffer + (q->head * q->item_size), q->item_size);
+    q->head = (q->head + 1) % q->length;
+    q->count--;
+    return 0;
+}
+
+/*
+ * Función: Queue_Free
+ * Descripción: Libera la memoria asignada a la cola.
+ */
+void Queue_Free(Queue_t* q) {
+    if (q != NULL) {
+        free(q->buffer);
+        free(q);
+    }
 }
 
 
@@ -417,9 +485,41 @@ void Check_Alarms(void) {
  *
  */
 void PIT0_IRQHandler(void) {
-    /* Clean Interruption Flag*/
-    *PIT_TFLG0 = 1;
+	Alarm* current = list_a.head;
 
-    //DisableIRQ(PIT0_IRQn);
-    Check_Alarms();
+	while(current != NULL) {
+		if(current->enable == ENABLED) {
+			current->remain_time--;
+		}
+
+		if(current->remain_time == 0) {
+		    Task* task = list.task_map[current->task_ID - 'A'];
+
+			current->remain_time = current->original_time;
+			task->task_state = READY;
+			PRINTF("Alarma activada para tarea %c\n\r", task->task_ID);
+
+			current->alarm_activated = 1;
+		}
+		current = current->next;
+	}
+
+	/* Clean Interruption Flag*/
+	*PIT_TFLG0 = 1;
+
+//	if(Alarm_Activated) {
+//		NVIC_DisableIRQ(PIT0_IRQn);
+//		Save_Context();
+//		asm("add sp, #0x28");
+//		Scheduler();
+//	}
+	while(current != NULL) {
+		if(current->alarm_activated == 1) {
+			NVIC_DisableIRQ(PIT0_IRQn);
+			current->alarm_activated = 0;
+			Save_Context();
+			asm("add sp, #0x28");
+			Scheduler();
+		}
+	}
 }

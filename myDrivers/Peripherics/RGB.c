@@ -31,6 +31,8 @@ void Config_Pins(void) {
     PCR_PTB5 |= (1 << 8);	// PTB5
     PCR_PTB6 |= (1 << 8);	// PTB6
     PCR_PTB7 |= (1 << 8);	// PTB7
+
+    Init_Pins();
 }
 
 /*
@@ -44,6 +46,8 @@ void Init_Pins(void) {
     GPIO_B->PDDR |= (1 << 2) | (1 << 3) | (1 << 4) | (1 << 5) | (1 << 6) | (1 << 7);
     GPIO_C->PDDR |= (1 << 9);   // PTC9  como salida (LED Rojo)
     GPIO_E->PDDR |= (1 << 6);   // PTE6  como salida (LED Verde)
+
+    Off();
 }
 
 /*
