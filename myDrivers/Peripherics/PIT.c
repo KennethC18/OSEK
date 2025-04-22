@@ -20,9 +20,9 @@ void PIT_Config(void) {
 
 	/*
 	 *	Set time value to generate an interrput.
-	 *	In this case, is = (BusClockFreq / 22,050) - 1
+	 *	In this case, is = (BusClockFreq / 1,000,000) - 1 = 59 = 0x3B
 	 */
-	*PIT_LDVAL0 = 0x1770;
+	*PIT_LDVAL0 = 0x3B;
 
 	/*
 	 * CHN (2)	= 0 (Timer is NOT chained)

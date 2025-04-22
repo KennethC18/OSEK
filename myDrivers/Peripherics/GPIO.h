@@ -8,8 +8,8 @@
  *  para controlar los LEDs RGB en el sistema.
  */
 
-#ifndef PERIPHERICS_RGB_H_
-#define PERIPHERICS_RGB_H_
+#ifndef PERIPHERICS_GPIO_H_
+#define PERIPHERICS_GPIO_H_
 
 // Incluir librerías necesarias
 #include <stdint.h>  // Para tipos de datos como uint32_t
@@ -85,6 +85,14 @@ typedef struct {
 void Config_Pins(void);
 
 /*
+ * Función: GPIO_Config
+ * Descripción: Configura el pin del botón SW3 en el puerto A.
+ * Parámetros: Ninguno
+ * Retorno: Ninguno
+ */
+void GPIO_Config(void);
+
+/*
  * Función: Init_Pins
  * Descripción: Inicializa los pines GPIO como salidas.
  * Parámetros: Ninguno
@@ -132,4 +140,4 @@ void White(void);
  */
 void Off(void);
 
-#endif /* PERIPHERICS_RGB_H_ */
+#endif /* PERIPHERICS_GPIO_H_ */

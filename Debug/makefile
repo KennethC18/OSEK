@@ -33,7 +33,7 @@ $(wildcard ../makefile.init) \
 $(wildcard ../makefile.targets) \
 
 
-BUILD_ARTIFACT_NAME := OSEK_Queues
+BUILD_ARTIFACT_NAME := OSEK_vUART_PWM
 BUILD_ARTIFACT_EXTENSION := axf
 BUILD_ARTIFACT_PREFIX :=
 BUILD_ARTIFACT := $(BUILD_ARTIFACT_PREFIX)$(BUILD_ARTIFACT_NAME)$(if $(BUILD_ARTIFACT_EXTENSION),.$(BUILD_ARTIFACT_EXTENSION),)
@@ -45,24 +45,24 @@ all:
 	+@$(MAKE) --no-print-directory main-build && $(MAKE) --no-print-directory post-build
 
 # Main-build Target
-main-build: OSEK_Queues.axf
+main-build: OSEK_vUART_PWM.axf
 
 # Tool invocations
-OSEK_Queues.axf: $(OBJS) $(USER_OBJS) makefile $(OPTIONAL_TOOL_DEPS)
+OSEK_vUART_PWM.axf: $(OBJS) $(USER_OBJS) makefile $(OPTIONAL_TOOL_DEPS)
 	@echo 'Building target: $@'
 	@echo 'Invoking: MCU Linker'
-	arm-none-eabi-gcc -nostdlib -Xlinker -Map="OSEK_Queues.map" -Xlinker --gc-sections -Xlinker -print-memory-usage -Xlinker --sort-section=alignment -Xlinker --cref -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -T OSEK_Queues_Debug.ld -o "OSEK_Queues.axf" $(OBJS) $(USER_OBJS) $(LIBS)
+	arm-none-eabi-gcc -nostdlib -Xlinker -Map="OSEK_vUART_PWM.map" -Xlinker --gc-sections -Xlinker -print-memory-usage -Xlinker --sort-section=alignment -Xlinker --cref -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -T OSEK_vUART_PWM_Debug.ld -o "OSEK_vUART_PWM.axf" $(OBJS) $(USER_OBJS) $(LIBS)
 	@echo 'Finished building target: $@'
 	@echo ' '
 
 # Other Targets
 clean:
-	-$(RM) OSEK_Queues.axf
+	-$(RM) OSEK_vUART_PWM.axf
 	-@echo ' '
 
 post-build:
 	-@echo 'Performing post-build steps'
-	-arm-none-eabi-size "OSEK_Queues.axf"; # arm-none-eabi-objcopy -v -O binary "OSEK_Queues.axf" "OSEK_Queues.bin" ; # checksum -p MK66FN2M0xxx18 -d "OSEK_Queues.bin";
+	-arm-none-eabi-size "OSEK_vUART_PWM.axf"; # arm-none-eabi-objcopy -v -O binary "OSEK_vUART_PWM.axf" "OSEK_vUART_PWM.bin" ; # checksum -p MK66FN2M0xxx18 -d "OSEK_vUART_PWM.bin";
 	-@echo ' '
 
 .PHONY: all clean dependents main-build post-build

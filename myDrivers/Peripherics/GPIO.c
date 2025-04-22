@@ -7,7 +7,7 @@
  *  Este archivo contiene la implementación de las funciones para controlar los LEDs RGB.
  */
 
-#include <Peripherics/RGB.h>
+#include <Peripherics/GPIO.h>
 
 /*
  * Función: Config_Pins
@@ -17,15 +17,15 @@
  * Retorno: Ninguno
  */
 void Config_Pins(void) {
-    // Habilitar el reloj para los puertos E, C, B y A
-    SIM_SCGC5 |= (1 << 13) | (1 << 11) | (1 << 10) | (1 << 9);
+    // Habilitar el reloj para los puertos E, D, C, B y A
+    SIM_SCGC5 |= (1 << 13) | (1 << 12) | (1 << 11) | (1 << 10) | (1 << 9);
 
     // Configurar los pines como GPIO
     PCR_PTA11 |= (1 << 8);  // PTA11 (LED Azul)
     PCR_PTC9  |= (1 << 8);  // PTC9  (LED Rojo)
     PCR_PTE6  |= (1 << 8);  // PTE6  (LED Verde)
 
-    PCR_PTB2 |= (1 << 8);	// PTB2
+    /* PWM pins */
     PCR_PTB3 |= (1 << 8);	// PTB3
     PCR_PTB4 |= (1 << 8);	// PTB4
     PCR_PTB5 |= (1 << 8);	// PTB5
@@ -36,6 +36,56 @@ void Config_Pins(void) {
 }
 
 /*
+ * Función: GPIO_Config
+ * Descripción: Configura el pin del botón SW3 en el puerto A.
+ * Parámetros: Ninguno
+ * Retorno: Ninguno
+ */
+void GPIO_Config(void){
+	Config_Pins();
+
+	port_pin_config_t config = {
+		kPORT_PullUp,
+		kPORT_SlowSlewRate,
+		kPORT_PassiveFilterEnable,
+		kPORT_OpenDrainDisable,
+		kPORT_LowDriveStrength,
+		kPORT_MuxAsGpio,
+		kPORT_UnlockRegister,
+	};
+
+	uint32_t addr = 0;
+
+	addr = (uint32_t)&PORTA->PCR[25];
+	*(volatile uint16_t *)(addr) = *((const uint16_t *)(const void *)&config);
+
+//	addr = (uint32_t)&PORTB->PCR[18];
+//	*(volatile uint16_t *)(addr) = *((const uint16_t *)(const void *)&config);
+//
+//	addr = (uint32_t)&PORTC->PCR[2];
+//	*(volatile uint16_t *)(addr) = *((const uint16_t *)(const void *)&config);
+//
+//	addr = (uint32_t)&PORTD->PCR[0];
+//	*(volatile uint16_t *)(addr) = *((const uint16_t *)(const void *)&config);
+//
+//	addr = (uint32_t)&PORTE->PCR[7];
+//	*(volatile uint16_t *)(addr) = *((const uint16_t *)(const void *)&config);
+
+	PORTA->PCR[25] = (PORTA->PCR[25] & ~PORT_PCR_IRQC_MASK) | PORT_PCR_IRQC(kPORT_InterruptFallingEdge);
+//	PORTB->PCR[18] = (PORTA->PCR[18] & ~PORT_PCR_IRQC_MASK) | PORT_PCR_IRQC(kPORT_InterruptFallingEdge);
+//	PORTC->PCR[2]  = (PORTA->PCR[2]  & ~PORT_PCR_IRQC_MASK) | PORT_PCR_IRQC(kPORT_InterruptFallingEdge);
+//	PORTD->PCR[0]  = (PORTA->PCR[0]  & ~PORT_PCR_IRQC_MASK) | PORT_PCR_IRQC(kPORT_InterruptFallingEdge);
+//	PORTE->PCR[7]  = (PORTA->PCR[7]  & ~PORT_PCR_IRQC_MASK) | PORT_PCR_IRQC(kPORT_InterruptFallingEdge);
+
+	EnableIRQ(PORTA_IRQn);
+//	EnableIRQ(PORTB_IRQn);
+//	EnableIRQ(PORTC_IRQn);
+//	EnableIRQ(PORTD_IRQn);
+//	EnableIRQ(PORTE_IRQn);
+
+}
+
+/*
  * Función: Init_Pins
  * Descripción: Inicializa los pines GPIO como salidas.
  * Parámetros: Ninguno
@@ -43,7 +93,7 @@ void Config_Pins(void) {
  */
 void Init_Pins(void) {
     GPIO_A->PDDR |= (1 << 11);  // PTA11 como salida (LED Azul)
-    GPIO_B->PDDR |= (1 << 2) | (1 << 3) | (1 << 4) | (1 << 5) | (1 << 6) | (1 << 7);
+    GPIO_B->PDDR |= (1 << 3) | (1 << 4) | (1 << 5) | (1 << 6) | (1 << 7);
     GPIO_C->PDDR |= (1 << 9);   // PTC9  como salida (LED Rojo)
     GPIO_E->PDDR |= (1 << 6);   // PTE6  como salida (LED Verde)
 

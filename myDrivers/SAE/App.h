@@ -11,58 +11,22 @@
 #ifndef SAE_APP_H_
 #define SAE_APP_H_
 
-#include <Peripherics/RGB.h>
+#include <Peripherics/GPIO.h>
 #include <SAE/SO.h>
 #include "fsl_gpio.h"
 #include "fsl_port.h"
 
-// Librerías personalizadas
+void Task_PWM1(void);
+void Task_PWM2(void);
+void Task_PWM3(void);
+void Task_PWM4(void);
+void Task_PWM5(void);
 
-/*
- * Función: GPIO_Config
- * Descripción: Configura el pin del botón SW3 en el puerto A.
- * Parámetros: Ninguno
- * Retorno: Ninguno
- */
-void GPIO_Config(void);
-
-/*
- * Función: Task_A
- * Descripción: Tarea que ejecuta una secuencia de luces rojas y activa la Task_B.
- * Parámetros: Ninguno
- * Retorno: Ninguno
- */
-void Task_A(void);
-
-/*
- * Función: Task_B
- * Descripción: Tarea que ejecuta una secuencia de luces azules y activa la Task_C.
- * Parámetros: Ninguno
- * Retorno: Ninguno
- */
-void Task_B(void);
-
-/*
- * Función: Task_C
- * Descripción: Tarea que ejecuta una secuencia de luces verdes y finaliza.
- * Parámetros: Ninguno
- * Retorno: Ninguno
- */
-void Task_C(void);
-void Task_D(void);
-void Task_E(void);
-void Task_F(void);
-void Task_G(void);
-
-
-/*
- * Función: Task_ISR
- * Descripción: Tarea que se ejecuta en respuesta a una interrupción, activando una luz blanca.
- * Parámetros: Ninguno
- * Retorno: Ninguno
- */
-void Task_ISR(void);
-void Task_ISR_2(void);
+void Task_UART1(void);
+void Task_UART2(void);
+void Task_UART3(void);
+void Task_UART4(void);
+void Task_UART5(void);
 
 /*
  * Función: PORTA_IRQHandler
@@ -72,5 +36,9 @@ void Task_ISR_2(void);
  * Retorno: Ninguno
  */
 void PORTA_IRQHandler(void);
+void PORTB_IRQHandler(void);
+void PORTC_IRQHandler(void);
+void PORTD_IRQHandler(void);
+void PORTE_IRQHandler(void);
 
 #endif /* SAE_APP_H_ */

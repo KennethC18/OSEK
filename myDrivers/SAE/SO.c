@@ -9,9 +9,9 @@
  */
 
 #include <Peripherics/Low_Power.h>
-#include <Peripherics/RGB.h>
 #include <SAE/SO.h>
 #include <fsl_debug_console.h>
+#include <Peripherics/GPIO.h>
 
 /* Estructura global que contiene la lista de tareas y el puntero a la tarea actual */
 Alarm_List	list_a	= {NULL};
@@ -230,7 +230,7 @@ void Scheduler(void) {
     }
 
     // Si no hay tareas listas para ejecutarse, entrar en modo de bajo consumo
-    sleep();
+//    sleep();
 }
 
 /*
@@ -256,49 +256,49 @@ void Save_Context(void) {
         list.current_task->interrupted = 1;
     }
 
-    // Ajustar el puntero de la pila para apuntar a los datos guardados antes de la interrupción
-    asm("mov r6, sp");
-    asm("add r6, #0x2c");
-
-    // Cargar los datos y guardar en la estructura de contexto
-    asm("ldr r8, = list");  // Apuntar a la dirección base de 'list'
-    asm("add r8, #0x12c");  // Apuntar al contexto de la tarea actual/interrumpida
-
-    // Guardar XPSR
-    asm("mrs r9, xpsr");
-    asm("str r9, [r8]");
-
-    // Guardar PC
-    asm("ldr r9, [r6, #-8]");
-    asm("str r9, [r8, #4]");
-
-    // Guardar LR
-    asm("ldr r9, [r6, #-12]");
-    asm("str r9, [r8, #8]");
-
-    // Guardar SP
-    asm("ldr r9, [r6, #-40]");
-    asm("str r9, [r8, #12]");
-
-    // Guardar R12
-    asm("ldr r9, [r6, #-16]");
-    asm("str r9, [r8, #16]");
-
-    // Guardar R3
-    asm("ldr r9, [r6, #-20]");
-    asm("str r9, [r8, #20]");
-
-    // Guardar R2
-    asm("ldr r9, [r6, #-24]");
-    asm("str r9, [r8, #24]");
-
-    // Guardar R1
-    asm("ldr r9, [r6, #-28]");
-    asm("str r9, [r8, #28]");
-
-    // Guardar R0
-    asm("ldr r9, [r6, #-32]");
-    asm("str r9, [r8, #32]");
+//    // Ajustar el puntero de la pila para apuntar a los datos guardados antes de la interrupción
+//    asm("mov r6, sp");
+//    asm("add r6, #0x2c");
+//
+//    // Cargar los datos y guardar en la estructura de contexto
+//    asm("ldr r8, = list");  // Apuntar a la dirección base de 'list'
+//    asm("add r8, #0x12c");  // Apuntar al contexto de la tarea actual/interrumpida
+//
+//    // Guardar XPSR
+//    asm("mrs r9, xpsr");
+//    asm("str r9, [r8]");
+//
+//    // Guardar PC
+//    asm("ldr r9, [r6, #-8]");
+//    asm("str r9, [r8, #4]");
+//
+//    // Guardar LR
+//    asm("ldr r9, [r6, #-12]");
+//    asm("str r9, [r8, #8]");
+//
+//    // Guardar SP
+//    asm("ldr r9, [r6, #-40]");
+//    asm("str r9, [r8, #12]");
+//
+//    // Guardar R12
+//    asm("ldr r9, [r6, #-16]");
+//    asm("str r9, [r8, #16]");
+//
+//    // Guardar R3
+//    asm("ldr r9, [r6, #-20]");
+//    asm("str r9, [r8, #20]");
+//
+//    // Guardar R2
+//    asm("ldr r9, [r6, #-24]");
+//    asm("str r9, [r8, #24]");
+//
+//    // Guardar R1
+//    asm("ldr r9, [r6, #-28]");
+//    asm("str r9, [r8, #28]");
+//
+//    // Guardar R0
+//    asm("ldr r9, [r6, #-32]");
+//    asm("str r9, [r8, #32]");
 }
 
 /*
