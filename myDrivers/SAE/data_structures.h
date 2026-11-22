@@ -34,8 +34,8 @@ typedef enum {
 } Autostart;
 
 typedef enum {
-	ENABLED,
-	DISABLED
+    ENABLED,
+    DISABLED
 } Enable_Alarm;
 
 /*
@@ -67,15 +67,16 @@ typedef enum {
  * - r0:  Registro de uso general R0.
  */
 typedef struct {
-    uint32_t xpsr;
-    uint32_t pc;
-    uint32_t lr;
-    uint32_t sp;
+	uint32_t r0;
+	uint32_t r1;
+	uint32_t r2;
+	uint32_t r3;
     uint32_t r12;
-    uint32_t r3;
-    uint32_t r2;
-    uint32_t r1;
-    uint32_t r0;
+
+    uint32_t lr;
+    uint32_t pc;
+    uint32_t xpsr;
+    uint32_t sp;
 } Context;
 
 /*
@@ -103,7 +104,6 @@ typedef struct Task {
     void*       return_address;
     uint8_t     interrupted;
     Context     context;
-
     struct Task* next;
 } Task;
 
@@ -118,33 +118,28 @@ typedef struct Task {
 typedef struct {
     Task* head;             // Primer elemento de la lista
     Task* current_task;     // Tarea actual en ejecución
-    Task* task_map[];       // Diccionario para acceso rápido por task_ID
+    Task* task_map[26];     // Diccionario para acceso rápido por task_ID (A-Z)
 } Task_List;
-
-
 
 /*
  * Estructuras para alarma
  */
 typedef struct Alarm {
-	char			task_ID;
-	uint16_t		original_time;
-	uint16_t		remain_time;
-	Enable_Alarm	enable;
-
-	uint8_t			alarm_activated;
-
-	struct Alarm*	next;
+    char            task_ID;
+    uint16_t        original_time;
+    uint16_t        remain_time;
+    Enable_Alarm    enable;
+    uint8_t         alarm_activated;
+    struct Alarm*   next;
 } Alarm;
 
 typedef struct {
-	Alarm* head;
+    Alarm* head;
 } Alarm_List;
-
 
 /*
  * Estructura para las queues
- * */
+ */
 typedef struct Queue {
     uint32_t length;     // Número máximo de elementos
     uint32_t item_size;  // Tamaño en bytes de cada elemento

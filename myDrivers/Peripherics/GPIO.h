@@ -23,6 +23,13 @@
 /*
  * Definiciones de direcciones de memoria para los registros de control de GPIO.
  */
+typedef enum pwm_pins{
+	PWM1_pin = 7,
+	PWM2_pin = 6,
+	PWM3_pin = 5,
+	PWM4_pin = 4,
+	PWM5_pin = 3
+} pwm_pins_t;
 
 // Registro de control de reloj para los puertos A, B, C, D y E
 #define SIM_SCGC5 (*((volatile uint32_t *) 0x40048038))

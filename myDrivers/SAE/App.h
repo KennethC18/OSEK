@@ -19,14 +19,10 @@
 void Task_PWM1(void);
 void Task_PWM2(void);
 void Task_PWM3(void);
-void Task_PWM4(void);
-void Task_PWM5(void);
 
 void Task_UART1(void);
 void Task_UART2(void);
 void Task_UART3(void);
-void Task_UART4(void);
-void Task_UART5(void);
 
 /*
  * Función: PORTA_IRQHandler
@@ -38,7 +34,5 @@ void Task_UART5(void);
 void PORTA_IRQHandler(void);
 void PORTB_IRQHandler(void);
 void PORTC_IRQHandler(void);
-void PORTD_IRQHandler(void);
-void PORTE_IRQHandler(void);
 
 #endif /* SAE_APP_H_ */
